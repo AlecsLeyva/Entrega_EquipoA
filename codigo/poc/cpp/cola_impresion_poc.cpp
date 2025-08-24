@@ -185,6 +185,44 @@ void probarRendimiento() {
     cout << "----------------------------------------------------" << endl;
 }
 
+void probarRendimiento20mil() {
+    cout << "\nCargando datos desde 'datasetX.txt'..." << endl;
+    // Le decimos que cargue los datos desde un nuevo archivo que debes crear.
+    vector<string> datasetGrande = cargarDatos("datasetX.txt");
+
+    if (datasetGrande.empty()) {
+        return;
+    }
+    cout << "Dataset de " << datasetGrande.size() << " elementos cargado." << endl;
+
+    // Medir tiempo de la Cola Manual
+    ColaManual colaManualTest;
+    auto inicioManual = chrono::high_resolution_clock::now();
+    for (int i = 0; i < datasetGrande.size(); i++) {
+        colaManualTest.agregar(datasetGrande[i]);
+    }
+    auto finManual = chrono::high_resolution_clock::now();
+    auto duracionManual = chrono::duration_cast<chrono::microseconds>(finManual - inicioManual);
+
+    // Medir tiempo de la Cola de Librería
+    queue<string> colaLibreriaTest;
+    auto inicioLibreria = chrono::high_resolution_clock::now();
+    for (int i = 0; i < datasetGrande.size(); i++) {
+        colaLibreriaTest.push(datasetGrande[i]);
+    }
+    auto finLibreria = chrono::high_resolution_clock::now();
+    auto duracionLibreria = chrono::duration_cast<chrono::microseconds>(finLibreria - inicioLibreria);
+
+    // Imprimir la tabla comparativa
+    cout << "\n--- TABLA COMPARATIVA DE RENDIMIENTO ---" << endl;
+    cout << "----------------------------------------------------" << endl;
+    cout << "| Implementacion      | Tiempo (microsegundos)     |" << endl;
+    cout << "----------------------------------------------------" << endl;
+    cout << "| Cola Manual         | " << duracionManual.count() << " us" << endl;
+    cout << "| Cola Libreria (std) | " << duracionLibreria.count() << " us" << endl;
+    cout << "----------------------------------------------------" << endl;
+}
+
 // --- Función para mostrar el menú ---
 void mostrarMenu() {
     cout << "\n*****************************************************" << endl;
@@ -192,7 +230,8 @@ void mostrarMenu() {
     cout << "*****************************************************" << endl;
     cout << "1. Probar con dataset normal (desde dataset.txt)" << endl;
     cout << "2. Probar rendimiento con 1000 datos (desde dataset1000.txt)" << endl;
-    cout << "3. Salir" << endl;
+    cout << "3. Probar rendimiento con 20000 datos (desde datasetX.txt)" << endl;
+    cout << "4. Salir" << endl;
     cout << "Elige una opcion: ";
 }
 
@@ -214,6 +253,9 @@ int main() {
                 probarRendimiento();
                 break;
             case 3:
+                probarRendimiento20mil(); // <-- NUEVA LLAMADA
+                break;
+            case 4: // <-- NÚMERO CAMBIADO
                 cout << "\nSaliendo del programa..." << endl;
                 break;
             default:
@@ -224,7 +266,7 @@ int main() {
         cin.ignore();
         cin.get();
 
-    } while (opcion != 3);
+    } while (opcion != 4);
 
     return 0;
 }
