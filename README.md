@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 PROYECTO FINAL - ESTRUCTURAS DE DATOS APLICADAS
 EQUIPO A - PILAS Y COLAS
 Integrantes:
@@ -151,3 +152,7 @@ Pila Librería (lista)
 Conclusión General: En todos los casos, las implementaciones que utilizan las librerías estándar de cada lenguaje demostraron ser significativamente más rápidas que nuestras implementaciones manuales. Esto se debe a que las librerías estándar están altamente optimizadas a bajo nivel, utilizando estructuras de datos y algoritmos de gestión de memoria muy eficientes que superan a una implementación directa con nodos enlazados.
 
 Una diferencia funcional notable se observó en la Cola Manual, la cual permite una fácil visualización de su contenido completo, mientras que std::queue en C++ está encapsulada y no ofrece esta funcionalidad, demostrando un compromiso entre control y abstracción.
+=======
+Esto es una prueba para el primer commit
+
+>>>>>>> e43e6fcc1241693794d58e1d6d7cc08d1e0f6228
